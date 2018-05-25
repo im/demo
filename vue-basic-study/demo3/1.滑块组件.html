@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .slider {
+            position: relative;
+            margin: 20px 0;
+            width: 400px;
+            height: 10px;
+            background: #e4e7ed;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .slider .process {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 112px;
+            height: 10px;
+            border-radius: 5px;
+            background: #409eff;
+        }
+        .slider .thunk{
+            position: absolute;
+            left: 100px;
+            top: -7px;
+            width: 20px;
+            height: 20px;
+        }
+        .slider .block {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #409eff;
+            background: rgba(255,255,255,1);
+            transition: .2s all;
+        }
+        .slider .tips {
+            position: absolute;
+            left: -7px;
+            bottom: 30px;
+            min-width: 15px;
+            text-align: center;
+            padding: 4px 8px;
+            background: #000;
+            border-radius: 5px;
+            height: 24px;
+            color: #fff;
+        }
+        .slider .tips i {
+            position: absolute;
+            margin-left: -5px;
+            left: 50%;
+            bottom: -9px;
+            font-size: 16px;
+            color: black;
+        }
+
+        .slider .block:hover {
+            transform: scale(1.1);
+            opacity: .6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+
+        <!--<div class="slider">-->
+            <!--<div class="process"></div>-->
+            <!--<div class="thunk">-->
+                <!--<div class="block"></div>-->
+                <!--<div class="tips">-->
+                    <!--<span>30</span>-->
+                    <!--<i class="fas fa-caret-down"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+        <slider :min="40" :max="100" v-model="v"></slider>
+        <slider :min="0" :max="100" v-model="v"></slider>
+
+    </div>
+
+
+    <script src="js/vue.js"></script>
+    <script>
+
+        /*
+        * 最小值，最大值，当前值
+        *
+        * 0 100 60
+        *
+        * 50 100 60
+        *
+        * 10 / 50
+        *
+        * (60 - 50) / (100 - 50)
+        *
+        * 拖拽
+        * */
+
+        Vue.component('slider', {
+            props: ['min', 'max', 'value'],
+            data() {
+                return {
+                    slider: null,
+                    thunk: null,
+                    v: this.value
+                }
+            },
+            mounted() { //渲染到页面的时候
+                //console.log(this.$refs.slider)
+                this.slider = this.$refs.slider;
+                this.thunk = this.$refs.thunk;
+
+                var _this = this;
+
+                this.thunk.onmousedown = function(e) {
+                    var width = parseFloat(_this.width);
+                    var disX = e.clientX;
+
+                    document.onmousemove = function(e) {
+                        // value, left, width
+
+                        // 我们可以去重点关注：value,当value变化的时候，会通过计算属性修改left，width
+
+                        // 移动的时候需要设置的width
+                        var newWidth = e.clientX - disX + width;
+
+                        var scale = newWidth / _this.slider.offsetWidth;
+
+//                        console.log(scale)
+
+                        _this.v = Math.ceil((_this.max - _this.min) * scale + _this.min);
+
+                        _this.v = Math.min(_this.v, _this.max);
+                        _this.v = Math.max(_this.v, _this.min);
+
+                    };
+
+                    document.onmouseup = function() {
+                        document.onmousemove = document.onmouseup = null;
+                    };
+
+                    return false;
+
+                }
+            },
+            computed: {
+                scale() {
+                    return (this.v - this.min) / (this.max - this.min);
+                },
+                width() {
+                    if (this.slider) {
+                        return this.$refs.slider.offsetWidth * this.scale + 'px';
+                    } else {
+                        return 0 + 'px'
+                    }
+                },
+                left() {
+                    if (this.thunk) {
+                        return this.$refs.slider.offsetWidth * this.scale - this.thunk.offsetWidth / 2 + 'px';
+                    } else {
+                        return 0 + 'px'
+                    }
+                }
+            },
+            template:`
+                <div class="slider" ref="slider">
+                    <div class="process" :style="{width}"></div>
+                    <div ref="thunk" class="thunk" :style="{left}">
+                        <div class="block"></div>
+                        <div class="tips">
+                            <span>{{v}}</span>
+                            <i class="fas fa-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+            `
+        });
+
+        new Vue({
+            el: '.box',
+            data: {
+                v: 50
+            }
+        });
+
+    </script>
+</body>
+</html>

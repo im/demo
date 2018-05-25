@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>扇形菜单</title>
+</head>
+<style>
+li{ list-style: none;}
+body{ background: #f9f9f9;}
+#menu{width: 50px; height: 50px; position:fixed; right: 200px; bottom:200px;}
+#menu_list{ height: 42px; width: 42px; position: relative; margin: 4px;}
+#menu_list li{ border-radius: 21px; position: absolute; left: 0; top: 0; -webkit-transition: 0.5s all ease; width: 42px; height: 42px; background: lime; text-align: center; line-height: 42px;}
+#home{ width: 50px; height: 50px; background: red; border-radius: 25px; position: absolute; left: 0; top: 0; transition: 0.5s; font-size: 30px; color: #fff; text-align: center; line-height: 50px;}
+</style>
+
+<script>
+window.onload = function(){
+    var oHome = document.getElementById('home');
+    var aLi = document.getElementById('menu_list').getElementsByTagName('li');
+    var bOff =true;
+    var iR = -150;
+    oHome.onclick = function(){
+        if(bOff){
+            this.style.WebkitTransform = 'rotate(-360deg)';
+            for(var i=0; i<aLi.length; i++){
+                var oLt = toLT(iR,90/4*i);
+                aLi[i].style.transition = '0.5s '+ i*50+'ms';
+                aLi[i].style.left = oLt.l +'px';
+                aLi[i].style.top = oLt.t+ 'px';
+                aLi[i].style.WebkitTransform = 'rotate(-360deg)';
+            }
+        }else{
+            this.style.WebkitTransform = 'rotate(0deg)';
+            for(var i=0; i<aLi.length; i++){
+                aLi[i].style.transition = '0.5s '+ (aLi.length-i-1)*50+'ms';
+                aLi[i].style.left = 0;
+                aLi[i].style.top = 0;
+                aLi[i].style.WebkitTransform = 'rotate(0deg)';
+            }
+        }
+        bOff=!bOff;
+    }
+
+    for(var i=0; i<aLi.length; i++){
+        aLi[i].onclick = function(){
+            this.style.transition = '0.5s';
+            this.style.WebkitTransform = 'scale(2)';
+        }
+    }
+}
+
+function toLT(iR,iDeg){
+    return {l:Math.round(Math.sin(iDeg/180*Math.PI)*iR),t:Math.round(Math.cos(iDeg/180*Math.PI)*iR)};
+}
+
+</script>
+
+
+<body>
+    <div id="menu">
+        <ul id="menu_list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+
+        </ul>
+        <div id="home">1</div>
+    </div>
+
+</body>
+</html>

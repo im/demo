@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .pagination {
+            margin: 10px 0;
+        }
+
+        .pagination span {
+            margin: 0 10px;
+        }
+
+        .pagination span.page, .pagination span.prev, .pagination span.next {
+            cursor: pointer;
+        }
+
+        .pagination span.page:hover {
+            color: #409eff;
+        }
+
+        .pagination span.page.active {
+            color: #409eff;
+            cursor: default;
+        }
+
+        .pagination span.prev.disabled, .pagination span.next.disabled {
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .pagination input[type='text'] {
+            padding: 2px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 60px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            outline: none;
+            transition: .2s all;
+        }
+        .pagination input[type='text']:focus {
+            border-color: #409eff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <ul>
+            <li v-for="news of showList">{{news}}</li>
+        </ul>
+
+        <pagination :total="newsList.length" :prepage="prepage" v-model="page"></pagination>
+
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+
+
+
+        Vue.component('pagination', {
+            props: ['total', 'prepage', 'value'],
+            data() {
+                return {
+                    pages: Math.ceil(this.total / this.prepage)
+                }
+            },
+            template:`
+                <div class="pagination">
+                    <span class="total">共 {{total}} 条 / {{pages}} 页</span>
+
+                    <span class="prev disabled">&lt;</span>
+
+                    <span v-for="p of pages" class="page" :class="{'active': p == value}" @click="change(p)">{{p}}</span>
+
+                    <span class="next">&gt;</span>
+
+                    <span class="jump">
+                        前往
+                        <input type="text" />
+                        页
+                    </span>
+                </div>
+            `,
+            methods: {
+                change(p) {
+                    this.$emit('input', p);
+                }
+            }
+        });
+
+        new Vue({
+            el: '.box',
+            data: {
+                newsList: [
+                    'JS 前端资深工程师就业精英班（远程）',
+                    '公开课：2018 年首发，给你们最关注的课程',
+                    '学员作品：90后的童年记忆 - 皮卡丘之《z 酷噜镇》',
+                    '妙味课堂2018年春节放假安排',
+                    '初学者：遇到技术问题，正确的提问方式',
+                    'VIP 视频更新：React 实战项目《CNode》开发',
+                    '公开课：登录 vue.js 星球，打通实战案例“通行证”',
+                    '妙味课堂 2018 年新班热招中~',
+                    '年终岁末，妙味实体班就业简报'
+                ],
+                page: 1,
+                prepage: 2
+            },
+            computed: {
+                showList() {
+
+                    var start = (this.page - 1) * this.prepage;
+                    start = Math.max(0, start);
+
+                    var end = start + this.prepage;
+                    end = Math.min(end, this.newsList.length);
+                    var news = [];
+
+                    for (var i=start; i<end; i++) {
+                        news.push(this.newsList[i]);
+                    }
+
+                    return news;
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>垂直居中</title>
+    <style>
+        body{ display: flex; flex-wrap: wrap;  }
+        .box{width: 200px;height: 200px;border: 1px solid #000;margin-right: 5px;  }
+        .content{background: #04BE02;}
+        .box1 {display: table; text-align: center }
+        .box1 .content {display: table-cell;vertical-align: middle;}
+
+        .box2 {position: relative;}
+        .box2 .content{ width: 50px; height: 50px; position:absolute; left: 50%;top:50%;margin: -25px 0 0 -25px; }
+
+        .box3{ position:relative;}
+        .box3  .content{ position: absolute;top:0;left:0;right:0;bottom: 0;margin: auto; width: 100px; height: 100px; }
+
+        .box4 {line-height: 200px; text-align: center}
+        .box4 .content{ vertical-align: middle; display: inline  }
+
+        .box5 {line-height: 200px; text-align: center }
+        .box5 img{vertical-align:middle}
+
+        .box6 .content{ width: 100px; height: 100px; margin: 50px;}
+
+        .box7 .floater{  float: left; height: 50%;width: 50%;margin-bottom: -50px; }
+        .box7 .content{ clear: both; width: 100px; height: 100px; margin: 0 auto;}
+        .box8 { display: flex; justify-content: center; align-items: center; }
+        .box9 { position:relative; }
+        .box9 .content{ width: 100px;height: 100px; position:absolute;   top:50%;
+            left:50%; transform: translate(-50%,-50%);}
+    </style>
+</head>
+<body>
+
+<div class="box1 box">
+   <div class="content">垂直居中1</div>
+</div>
+<div class="box2 box">
+        <div class="content">垂直居中2</div>
+</div>
+
+<div class="box3 box">
+        <div class="content">垂直居中3</div>
+</div>
+
+<div class="box4 box">
+    <div class="content">垂直居中4</div>
+</div>
+<div class="box5 box">
+
+    <img src="http://iph.href.lu/100x100">
+</div>
+<div class="box6 box">
+    <div class="content">垂直居中</div>
+</div>
+<div class="box7 box">
+    <div class="floater"></div>
+    <div class="content">垂直居中</div>
+</div>
+<div class="box8 box">
+    <div class="content">垂直居中</div>
+</div>
+<div class="box9 box">
+    <div class="content">垂直居中</div>
+</div>
+
+
+
+</body>
+</html>

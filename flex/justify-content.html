@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>justify-content</title>
+</head>
+
+
+<style>
+    body{
+        margin: 10px;;
+    }
+    .box {
+        display: flex;
+    }
+    .item{
+        width: 30px;
+        height: 30px;
+        background:#E88024 ;
+        margin: 5px;
+    }
+    .box1{justify-content: flex-start  }
+    .box2{justify-content: flex-end}
+    .box3{justify-content: center }
+    .box4{justify-content: space-between  }
+    .box5{justify-content: space-around }
+    .wrap{
+        width: 800px;
+        margin: 100px auto;
+    }
+</style>
+
+<body>
+
+<div class="wrap">
+    <h3>justify-content: flex-start </h3>
+    <div class="box box1">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>justify-content: flex-end</h3>
+    <div class="box box2">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>justify-content: center</h3>
+    <div class="box box3">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>justify-content: space-between</h3>
+    <div class="box box4">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>justify-content: space-around</h3>
+    <div class="box box5">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex-direction</title>
+</head>
+
+
+<style>
+    body{
+        margin: 10px;;
+    }
+    .box {
+        display: flex;
+    }
+    .item{
+        width: 30px;
+        height: 30px;
+        background:#E88024 ;
+        margin: 5px;
+    }
+    .box1{flex-direction: row;  }
+    .box2{flex-direction: row-reverse;  }
+    .box3{flex-direction: column;  }
+    .box4{flex-direction: column-reverse;  }
+</style>
+
+<body>
+    <h3>flex-direction: row;</h3>
+    <div class="box box1">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <h3>flex-direction: row-reverse;</h3>
+    <div class="box box2">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <h3>flex-direction: column;</h3>
+    <div class="box box3">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+    <h3>flex-direction: column-reverse;</h3>
+    <div class="box box4">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+    </div>
+
+</body>
+</html>

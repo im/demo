@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>align-items</title>
+</head>
+
+
+<style>
+    body{
+        margin: 10px;;
+    }
+    .box {
+        background: #ccc;
+        display: flex;
+        height: 100px;
+    }
+    .item{
+        width: 30px;
+        height: 30px;
+        background:#E88024 ;
+        margin: 0 5px;
+    }
+    .box1{align-items: flex-start  }
+    .box2{align-items: flex-end}
+    .box3{align-items: center }
+    .box4{align-items: baseline   }
+    .box5{
+        align-items: stretch;
+    }
+    .box5 .item{
+        height: auto;
+    }
+    .wrap{
+        width: 800px;
+        margin: 100px auto;
+    }
+</style>
+
+<body>
+
+<div class="wrap">
+    <h3>align-items: flex-start </h3>
+    <div class="box box1">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>align-items: flex-end</h3>
+    <div class="box box2">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>align-items: center</h3>
+    <div class="box box3">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>align-items: baseline</h3>
+    <div class="box box4">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+    <h3>align-items: stretch</h3>
+    <div class="box box5">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+    </div>
+</div>
+
+</body>
+</html>

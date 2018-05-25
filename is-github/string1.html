@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+<script type="text/javascript">
+    var arr = [];
+    var str = '';
+    for (var i = 0; i < 26; i++) {
+        str = '';
+        for (var j = 0; j <= 4; j++) {
+            str += String.fromCharCode(65 + i).toLocaleLowerCase();
+            if( j > 1){
+                arr.push(str)
+            }
+        }
+    }
+
+    console.log(arr)
+</script>

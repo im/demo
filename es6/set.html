@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>set</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+    let s = new Set([1,2,3]);
+    
+/*    console.dir(s)
+    
+    console.log(s.size)
+
+    console.log(s.add('a').add('b').add('c'))
+    
+    console.log(s.delete('a'))
+    
+    console.log(s)
+
+    console.log(s.has('a'))
+
+    console.log(s.keys())
+    console.log(s.values())
+    console.log(s.entries())
+    
+    s.forEach((value,key,set)=>{
+        console.log(set)
+        console.log(value)
+        console.log(key)
+    })*/
+    
+    var arr = [1,2,3,25,2,3];
+    var newArr = [];
+    new Set(arr).forEach((value) =>{
+        newArr.push(value)
+    })
+    
+
+    console.log(newArr)
+
+</script>

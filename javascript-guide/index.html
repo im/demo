@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createTextNode</title>
+</head>
+<body>
+</body>
+</html>
+<script>
+    function debug(msg){
+        var log = document.getElementById('debuglog')
+        if(!log){
+            log = document.createElement('div')
+            log.id = 'debuglog'
+            log.innerHTML = '<h1>debug log</h1>'
+            document.body.appendChild(log)
+            var pre = document.createElement('pre')
+            var text = document.createTextNode(msg)
+            console.log(text)
+            pre.appendChild(text)
+            log.appendChild(pre)
+        }
+    }
+
+    debug('发生错误')
+</script>

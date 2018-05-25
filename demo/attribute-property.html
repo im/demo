@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>attribute 和 property 区别</title>
+</head>
+
+<body>
+
+    <input type="text" id="ipt" github="xiaomi">
+
+</body>
+
+</html>
+<script>
+    let ipt = document.getElementById('ipt');
+
+    console.dir(ipt.id) //
+    console.dir(ipt.type)
+    console.dir(ipt.github)
+
+    ipt.setAttribute('github','pz')
+    console.log(ipt.getAttribute('github'))
+   /* * DOM对象初始化时会在创建默认的基本property；
+    * 只有在HTML标签中定义的attribute才会被保存在property的attributes属性中；
+    * attribute会初始化property中的同名属性，但自定义的attribute不会出现在property中；
+    * attribute的值都是字符串；*/
+</script>

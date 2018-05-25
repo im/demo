@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .tab {
+            width: 600px;
+            border: 1px solid #dcdfe6;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background: #f5f7fa;
+            border-bottom: 1px solid #e4e7ed;
+            position: relative;
+        }
+        li {
+            float: left;
+            padding: 0 20px;
+            margin: 0 0 -1px -1px;
+            position: relative;
+            height: 40px;
+            border: 1px solid transparent;
+            line-height: 40px;
+            cursor: pointer;
+            transition: .2s all;
+        }
+        li:hover {
+            color: rgb(64, 158, 255);
+        }
+        li.active {
+            background: #fff;
+            border-right-color: #dcdfe6;
+            border-left-color: #dcdfe6;
+            color: rgb(64, 158, 255);
+        }
+        .tab .content {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box" id="app">
+
+        <tab v-bind:datas="items1" :v="n" @changeaaa="aaaa"></tab>
+        <tab v-bind:datas="items2" :v="n"></tab>
+<!--
+        <div class="tab">
+            <ul class="clear">
+                &lt;!&ndash;<li class="active">北京</li>
+                <li>上海</li>
+                <li>广州</li>
+                <li>深圳</li>
+                <li>武汉</li>&ndash;&gt;
+                <li  v-for="item,index in items" v-bind:class="{ 'active' : n == index }" @click="tab(index)" > {{item.title}} </li>
+            </ul>
+            <div class="content">
+                <p> {{ items[n].context }}</p>
+            </div>
+        </div>-->
+
+    </div>
+
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script>
+
+    Vue.component('tab',{
+        template :`<div class="box" id="app">
+                        <div class="tab">
+                            <ul class="clear">
+                                <li  v-for="item,index in datas"   @click="tab(index)" v-bind:class="{ 'active' : val == index }" > {{item.title}} </li>
+                            </ul>
+                            <div class="content">
+                                <p> {{ datas[val].context }}</p>
+                            </div>
+                        </div>
+                    </div>`,
+        props:['datas','v'],
+        data (){
+            return {
+                val : this.v
+            }
+        },
+        methods : {
+            tab(index){
+                this.val = index;
+
+                this.$emit('changeaaa', this.val);
+            }
+        }
+    })
+
+    new Vue ({
+        el : '#app',
+        data : {
+            items1 :[
+                {
+                    title : '北京',
+                    context : '这是北京'
+                },
+                {
+                    title : '上海',
+                    context : '这是上海'
+                },
+                {
+                    title : '广州',
+                    context : '这是广州'
+                },
+                {
+                    title : '深圳',
+                    context : '这是深圳'
+                },
+                {
+                    title : '武汉',
+                    context : '这是武汉'
+                },
+            ],
+            items2 :[
+                {
+                    title : '长沙',
+                    context : '这是长沙'
+                },
+                {
+                    title : '上海',
+                    context : '这是上海'
+                },
+                {
+                    title : '广州',
+                    context : '这是广州'
+                },
+                {
+                    title : '深圳',
+                    context : '这是深圳'
+                },
+                {
+                    title : '武汉',
+                    context : '这是武汉'
+                },
+            ],
+            n : 0
+
+        },
+        methods:{
+            aaaa(){
+                console.log(111)
+            }
+        }
+    })
+
+</script>

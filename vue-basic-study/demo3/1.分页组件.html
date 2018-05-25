@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .pagination {
+            margin: 10px 0;
+        }
+
+        .pagination span {
+            margin: 0 10px;
+        }
+
+        .pagination span.page, .pagination span.prev, .pagination span.next {
+            cursor: pointer;
+        }
+
+        .pagination span.page:hover {
+            color: #409eff;
+        }
+
+        .pagination span.page.active {
+            color: #409eff;
+            cursor: default;
+        }
+
+        .pagination span.prev.disabled, .pagination span.next.disabled {
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .pagination input[type='text'] {
+            padding: 2px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 60px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            outline: none;
+            transition: .2s all;
+        }
+        .pagination input[type='text']:focus {
+            border-color: #409eff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <!--<div class="pagination">-->
+            <!--<span class="total">共 400 条 / 40 页</span>-->
+
+            <!--<span class="prev disabled">&lt;</span>-->
+
+            <!--<span class="page active">1</span>-->
+            <!--<span class="page">2</span>-->
+            <!--<span class="page">3</span>-->
+
+            <!--<span class="next">&gt;</span>-->
+
+            <!--<span class="jump">-->
+                <!--前往-->
+                <!--<input type="text" />-->
+                <!--页-->
+            <!--</span>-->
+        <!--</div>-->
+
+        <pagination :total="61" :prepage="10" :page="page1" @change="parentChange1"></pagination>
+        <pagination :total="30" :prepage="5" :page="page2" @change="parentChange2"></pagination>
+
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+
+        /*
+        * - 结构与样式
+        * - 功能
+        *
+        * - 传递数据给组件：组件标签的属性来实现
+        *
+        * - 需求功能分析
+        *   - 总数据、每页显示的条数，计算得到总页数
+        *   - 分页列表
+        *   - 点击跳转
+        *
+        * 要求：
+        *   组件显示的页面数量最多控制在5页
+        *       1:1,2,3,4,5
+        *       2:1,2,3,4,5
+        *       3:1,2,3,4,5
+        *       4:2,3,4,5,6
+        *       5:3,4,5,6,7
+        * */
+
+        Vue.component('pagination', {
+            props: ['total', 'prepage', 'page'],
+            data() {
+                return {
+                    pages: Math.ceil(this.total / this.prepage)
+                }
+            },
+            template:`
+                <div class="pagination">
+                    <span class="total">共 {{total}} 条 / {{pages}} 页</span>
+
+                    <span class="prev disabled">&lt;</span>
+
+                    <span v-for="p of pages" class="page" :class="{'active': p == page}" @click="change(p)">{{p}}</span>
+
+                    <span class="next">&gt;</span>
+
+                    <span class="jump">
+                        前往
+                        <input type="text" />
+                        页
+                    </span>
+                </div>
+            `,
+            methods: {
+                change(p) {
+                    // this.page = p;
+                    this.$emit('change', p);
+                }
+            }
+        });
+
+        new Vue({
+            el: '.box',
+            data: {
+                page1: 1,
+                page2: 2
+            },
+            methods: {
+                parentChange1(p) {
+                    this.page1 = p;
+                },
+                parentChange2(p) {
+                    this.page2 = p;
+                }
+            }
+        });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    //拷贝继承
+    function A(name,age) {
+        this.name = name;
+        this.age = age;
+    }
+    A.prototype.run = function () {
+        console.log(this.name + '今年' + this.age + '岁')
+    }
+    var a = new A('小米',20)
+    a.run()
+    function B() {
+        A.call(this,'小明',18)
+    }
+    copy(B.prototype,A.prototype)
+    var b = new B();
+    function extend(obj1,obj2) {
+        for(var attr in obj2){
+            obj1[attr] = obj2[attr]
+        }
+
+    }
+    b.run()
+
+
+</script>

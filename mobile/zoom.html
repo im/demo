@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>通过js控制zoom 进行移动端适配</title>
+    <script src="../static/js/zepto.min.js"></script>
+    <script>
+        $(function() {
+
+            s();
+            function s() {
+                var w = window.innerWidth;
+                var a = w / 640;
+                a = a > 1 ? 1 : a;
+                if (a < 0.5) {
+                    a = 0.5
+                }
+                $("html").css({
+                    zoom: (a * 100) + "%"
+                })
+            }
+            var b = ("onorientationchange" in window) ? "orientationchange" : "resize";
+            window.addEventListener(b, function() {
+                if (b == orientationchange) {
+                    return false
+                }
+                window.setTimeout(function() {
+                    s()
+                }, 1000 / 30)
+            }, false)
+        });
+    </script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    h1{ color: red;}
+    .box{
+        width: 640px;
+        font-size: 20px;
+        height: 200px;
+        background: darkslategray;
+        margin: 0 auto;
+    }
+</style>
+<body>
+
+    <h1>111111</h1>
+    <div class="box">
+        字体
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .pagination {
+            margin: 10px 0;
+        }
+
+        .pagination span {
+            margin: 0 10px;
+        }
+
+        .pagination span.page, .pagination span.prev, .pagination span.next {
+            cursor: pointer;
+        }
+
+        .pagination span.page:hover {
+            color: #409eff;
+        }
+
+        .pagination span.page.active {
+            color: #409eff;
+            cursor: default;
+        }
+
+        .pagination span.prev.disabled, .pagination span.next.disabled {
+            color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .pagination input[type='text'] {
+            padding: 2px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            width: 60px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            outline: none;
+            transition: .2s all;
+        }
+        .pagination input[type='text']:focus {
+            border-color: #409eff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+
+        <div class="pagination">
+            <span class="total">共 400 条 / 40 页</span>
+
+            <span class="prev disabled">&lt;</span>
+
+            <span class="page active">1</span>
+            <span class="page">2</span>
+            <span class="page">3</span>
+
+            <span class="next">&gt;</span>
+
+            <span class="jump">
+                前往
+                <input type="text" />
+                页
+            </span>
+        </div>
+
+    </div>
+
+</body>
+</html>

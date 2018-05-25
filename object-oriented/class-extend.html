@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    //类式继承
+    function A() {
+        this.name = '小米';
+        this.age = 20;
+    }
+    A.prototype.run = function () {
+        console.log(this.name + '今年' + this.age + '岁')
+    }
+    function B() {
+    }
+    var F = function (){}
+    F.prototype = A.prototype;// A的prototype下面没有带name 属性， 只有run方法，所有复制过去的只有方法
+    // B.prototype =  new A();
+    B.prototype =  new F();
+    B.prototype.constructor =  B //修改构造函数指向
+    var b = new B();
+    b.run()
+
+
+</script>

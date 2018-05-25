@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="flexible.js" type="text/javascript"></script>
+    <title>flexible.js</title>
+</head>
+
+
+<style lang="scss" rel="stylesheet/scss">
+    *, pre {
+        padding: 0;
+        margin: 0;
+        font-family: "Microsoft YaHei, Microsoft YaHei UI";
+    }
+
+    @function px2em($px, $base-font-size: 75px) {
+        @if (unitless($px)) {
+            @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+            @return px2em($px + 0px);
+        } @else if (unit($px) == em) {
+            @return $px;
+        }
+
+        @return ($px  / $base-font-size ) * 1rem;
+    }
+
+    @mixin font($font-size) {
+        font-size: $font-size;
+
+        [data-dpr="2"] & {
+            font-size: $font-size * 2;
+        }
+
+        [data-dpr="3"] & {
+            font-size: $font-size * 3;
+        }
+    }
+
+
+
+</style>
+
+
+<body>
+<div class="box">
+
+        <pre>
+            <h1>换算页面尺寸方法</h1>
+            @function px2em($px, $base-font-size: 75px) {
+                @if (unitless($px)) {
+                    @warn "Assuming #{$px} to be in pixels, attempting to convert it into pixels for you";
+                    @return px2em($px + 0px);
+                } @else if (unit($px) == em) {
+                    @return $px;
+                }
+
+                @return ($px  / $base-font-size ) * 1rem;
+            }
+
+            @mixin font($font-size) {
+                font-size: $font-size;
+
+                [data-dpr="2"] & {
+                    font-size: $font-size * 2;
+                }
+
+                [data-dpr="3"] & {
+                    font-size: $font-size * 3;
+                }
+            }
+        </pre>
+
+</div>
+</body>
+</html>

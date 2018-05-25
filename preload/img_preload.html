@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, width=device-width"/>
+    <meta name="format-detection" content="telephone=no, email=no, address=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .u-progress {
+            position: relative;
+            border: 1px solid #000;
+            width: 300px;
+            padding: 2px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 12px;
+            margin: 50px;
+            text-align: center;
+        }
+
+        .u-progress i {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: seagreen;
+            border-radius: 10px;
+            transition: width .3s;
+        }
+
+        .u-progress p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="u-progress" id="j-progress"><i style="width:0"></i>
+    <p>0%</p></div>
+
+<img src="https://im.github.io/i/static/img/1.jpg">
+<img src="https://im.github.io/i/static/img/2.jpg">
+<img src="https://im.github.io/i/static/img/3.jpg">
+<img src="https://im.github.io/i/static/img/4.jpg">
+<img src="https://im.github.io/i/static/img/5.jpg">
+<img src="https://im.github.io/i/static/img/6.jpg">
+
+<script src="../static/js/jquery.min.js"></script>
+<script>
+    //图片预加载
+    (function ($) {
+        $.preload = function (options) {
+            var opts = $.extend({}, options);
+            //图片总数
+            var total = opts.list.length;
+            //加载完成图片数量
+            var loadedNum = 0;
+
+            $.each(opts.list, function (i) {
+                //创建图片对象
+                var img = new Image();
+                //设置图片地址
+                img.src = opts.list[i];
+
+                //图片加载完成
+                img.onload = function () {
+                    loadedNum++;
+                    opts.loaded(loadedNum, total);
+                    if (loadedNum == total) {
+                        opts.loadedAll(loadedNum, total);
+                    }
+                };
+                //图片加载失败
+                img.onerror = function () {
+                    img.onload();
+                };
+            });
+        }
+    })(jQuery);
+
+    //调用
+    $.preload({
+        list: [
+            'https://im.github.io/i/static/img/1.jpg',
+            'https://im.github.io/i/static/img/2.jpg',
+            'https://im.github.io/i/static/img/3.jpg',
+            'https://im.github.io/i/static/img/4.jpg',
+            'https://im.github.io/i/static/img/5.jpg',
+            'https://im.github.io/i/static/img/6.jpg'
+        ],
+        loaded: function (num, total) {
+            //num 为当前已加载完成的图片数量、total为图片总数量
+            console.log(num, total);
+            $('#j-progress').find('i').css('width', (num / total).toFixed(2) * 100 + '%');
+            $('#j-progress').find('p').html((num / total).toFixed(2) * 100 + '%');
+        },
+        loadedAll: function (num, total) {
+            console.log('图片加载完成');
+        }
+    })
+
+</script>
+</body>
+</html>

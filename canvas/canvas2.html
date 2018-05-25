@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+</head>
+
+<body>
+<canvas  width="148" height="148" score="30" class="score" style="background: #5EC8E2;"></canvas>
+<script type=text/javascript>
+
+    var aScore = document.getElementsByClassName('score');
+
+    for(var i = 0; i < aScore.length; i++){
+        var cxt = aScore[i].getContext("2d");
+        //var score = parseInt(aScore[i].getAttribute('score'))/50;
+
+        cxt.beginPath();
+        cxt.arc(74,74,72,0,Math.PI*2,false);
+        cxt.lineWidth=6;
+        cxt.strokeStyle="#ADE0EF";
+        cxt.stroke();
+        cxt.closePath();
+
+        cxt.beginPath();
+        cxt.arc(74,74,72,10,false);
+        cxt.lineWidth=6;
+        cxt.strokeStyle="#fff";
+        cxt.stroke();
+        cxt.closePath();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html >
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>页面点击隐藏</title>
+    <style type="text/css">
+        #box {
+            width: 300px;
+            height: 100px;
+            background: #060;
+            padding: 20px;
+            color: #FFF;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#box").click(function () {
+                return false;
+            })
+            $("#click").click(function () {
+                $("#box").toggle();
+                flag = true;
+
+            })
+            $(document).click(function () {
+
+                if ($("#box").is(":visible") && flag != true) {
+                    $("#box").hide();
+                }
+                flag = false;
+            });
+        })
+    </script>
+</head>
+
+<body>
+<input type="button" value="点 击" id="click"/>
+<div id="box"> 点击按钮显示、点页面其他地方隐藏（点击自身不隐藏）</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1 v-html="message"></h1>
+        <div v-if="false">{{message}}}</div>
+        <div v-show="false">{{message}}}</div>
+
+        <ul>
+            <li v-for="item,index in users">{{index}} - {{ item }}</li>
+        </ul>
+
+        <div :id="name"></div>
+        <input type="text" v-model="v">
+        <textarea v-model="v">{{v}}</textarea>
+
+
+        <button v-on:click="toggle">按钮</button>
+        <div v-show="isShow" style="width: 100px;height: 100px;background: blue"></div>
+
+    </div>
+
+
+
+</body>
+</html>
+<script>
+
+    var message = 'hello world1<div>1111</div>';
+
+    new Vue({
+
+        el : '#app',
+        data :{
+            message :message,
+            name : 'name',
+            users : ['xiaomi','huawei','vivo','oppo'],
+            v : '123',
+            isShow : false
+        },
+        methods : {
+            toggle (e) {
+                console.log(e)
+                this.isShow = !this.isShow
+            }
+        }
+
+    })
+
+</script>

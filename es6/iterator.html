@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iterator</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+  /*  const arr = [1,2,3]
+
+    function iterator(arr) {
+        let index = 0;
+        return {
+            next :function () {
+                return index < arr.length ? { value : arr[index++], done : false } : {value : undefined, done:true}
+            }
+        }
+    }
+    let it  = iterator(arr)
+
+    console.log(it.next())
+    console.log(it.next())
+    console.log(it.next())
+    console.log(it.next())*/
+
+
+    const arr = [1,2,3];
+    const set = new Set(['a','b','c']);
+    const map = new Map([['a',1]]);
+
+    const isArr = arr[Symbol.iterator]();
+    const isSet = set[Symbol.iterator]();
+    const isMap = map[Symbol.iterator]();
+
+    console.log(isSet.next())
+    console.log(isSet.next())
+    console.log(isSet.next())
+    console.log(isSet.next())
+
+</script>

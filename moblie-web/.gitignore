@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+### NetBeans template
+nbproject
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.idea
+.project
+.buildpath
+node_modules
+.settings
+

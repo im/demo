@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            margin: 100px auto 0;
+            width: 80%;
+        }
+        .clear:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .tab {
+            width: 600px;
+            border: 1px solid #dcdfe6;
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            background: #f5f7fa;
+            border-bottom: 1px solid #e4e7ed;
+            position: relative;
+        }
+        li {
+            float: left;
+            padding: 0 20px;
+            margin: 0 0 -1px -1px;
+            position: relative;
+            height: 40px;
+            border: 1px solid transparent;
+            line-height: 40px;
+            cursor: pointer;
+            transition: .2s all;
+        }
+        li:hover {
+            color: rgb(64, 158, 255);
+        }
+        li.active {
+            background: #fff;
+            border-right-color: #dcdfe6;
+            border-left-color: #dcdfe6;
+            color: rgb(64, 158, 255);
+        }
+        .tab .content {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+        <mv-tab :items="items1" :v="n"></mv-tab>
+        <mv-tab :items="items2" :v="n"></mv-tab>
+
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script>
+
+        /*
+        * Vue.component(组件名称, 组件配置)
+        *   创建组件
+        *   配置：
+        *       template: 组件的模板，html结构
+        *       props: 组件的形参，接收来自外部的数据，实参：在组件调用传入，因为组件通过标签形式调用，所以实参通过标签属性形式传入
+        *       属性：普通的写法，v-bind写法
+        *
+        * 组件使用：
+        *   通过标签的方式去调用组件
+        *
+        *   注意：组件名称在html中不支持大写，如果定义的时候有大写，要转成 -大写字母
+        *       不要和内置的标签重合 header
+        *
+        * 为了能够使组件的复用性更好，那么组件其实可以接收来自其外部的数据，然后根据不同的数据渲染不同内容
+        * */
+        Vue.component('mv-tab', {
+            props: ['items', 'v'],   //this.datas
+            data() {
+                // 组件私有数据，组件中的data必须是一个函数，这个函数必须返回一个对象，返回对象就是最后的data数据
+                return {
+                    value: this.v
+                }
+            },
+            template:`
+            <div class="box">
+
+                <div class="tab">
+                    <ul class="clear">
+                        <li
+                            v-for="item,index of items"
+                            :class="{'active': index == value}"
+                            @click="choose(index)"
+                        >{{item.title}}</li>
+                    </ul>
+                    <div class="content">
+                        <p>{{items[value].content}}</p>
+                    </div>
+                </div>
+
+            </div>
+            `,
+            methods: {
+                choose(index) {
+                    // vue ：子组件不能（不要）去修改父组件的数据，如果要修改数据，这个数据不要放在props里直接操作
+                    this.value = index;
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+            data: {
+                items1: [
+                    {title: '北京', content: '我的内容是北京'},
+                    {title: '上海', content: '我的内容是上海'},
+                    {title: '广州', content: '我的内容是广州'},
+                    {title: '深圳', content: '我的内容是深圳'},
+                    {title: '武汉', content: '我的内容是武汉'}
+                ],
+                items2: [
+                    {title: '前端', content: 'html+css+javascript'},
+                    {title: '后端', content: 'java+.net+php+node'},
+                    {title: '设计', content: 'photoshop'}
+                ],
+                n: 0
+            }
+        });
+
+    </script>
+
+</body>
+</html>

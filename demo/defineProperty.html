@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>defineProperty</title>
+</head>
+
+<body>
+
+<div>你好, <input type="text" value="xiaomi" id="nickname"></div>
+<div id="desc"></div>
+
+<button id="btn">点击</button>
+
+</body>
+</html>
+<script>
+
+    let nickname = document.getElementById('nickname');
+    let desc = document.getElementById('desc');
+    let btn = document.getElementById('btn');
+
+    let userInfo = {};
+
+    Object.defineProperty(userInfo,'nickname',{
+        get : function () {
+            desc.innerHTML = nickname.value;
+            return nickname.value
+            
+        },
+        set:function (nick) {
+            nickname.value = nick
+            desc.innerHTML = nick;
+        }
+    })
+    userInfo.nickname
+    nickname.oninput = function(){
+        userInfo.nickname = this.value
+    }
+    btn.onclick = function () {
+        userInfo.nickname = '111';
+    }
+
+</script>
+

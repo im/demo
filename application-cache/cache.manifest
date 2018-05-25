@@ -1,0 +1,14 @@
+CACHE MANIFEST
+#v0.14
+CACHE:
+
+/css/reset.css
+/js/util.js
+/img/demo1.png
+/img/demo2.jpg
+
+NETWORK:
+
+
+FALLBACK:
+offline.html
