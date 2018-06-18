@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" type="text/css" href="base.css">
+    <link rel="stylesheet" type="text/css" href="media.css">
+    <title>media</title>
+</head>
+<style>
+
+    .wrap {
+        width: 4rem;
+        margin: 0 auto;
+    }
+
+    .one {
+        height: 0.2rem;
+        padding-top: 0.2rem;
+        margin-bottom: 0.1rem;
+    }
+
+    .one p {
+        float: left;
+        height: 0.2rem;
+        width: 30%;
+        margin: 0 1.5%;
+    }
+
+    .one p label {
+        width: 20%;
+        margin-right: 5%;
+    }
+
+    .one p input {
+        display: inline-block;
+        width: 66%;
+        font-size: 0.12rem;
+        line-height: 0.2rem;
+        border: 1px solid #ccc;
+        padding: 0 2%;
+    }
+
+    .one p select {
+        display: inline-block;
+        width: 66%;
+        font-size: 0.12rem;
+        line-height: 0.2rem;
+        border: 1px solid #ccc;
+        padding: 0 2%;
+    }
+
+    .two {
+        width: 4rem;
+        margin-bottom: 0.15rem;
+        height: 0.3rem;
+        margin: 0 auto
+    }
+
+    .two input {
+        outline: none;
+        width: 25%;
+        float: left;
+        margin: 0 4%;
+        height: 0.25rem;
+        border: none;
+        color: #fff;
+    }
+
+    .two input:nth-of-type(1) {
+        background: #4AB847;
+    }
+
+    .two input:nth-of-type(2) {
+        background: #D50005;
+    }
+
+    .two input:nth-of-type(3) {
+        background: #FCD208;
+    }
+
+    .three {
+        margin: 0 auto;
+        width: 4rem;
+        height: 3.5rem;
+    }
+
+    .three textarea {
+        width: 4rem;
+        height: 3.5rem;
+        border: 1px solid #ccc;
+        resize: none;
+        font-size: 0.02rem;
+    }
+
+    .four .tips {
+        color: red;
+        font-size: 0.1rem;
+        margin: 0.10rem 0;
+    }
+
+</style>
+<body>
+<form onsubmit="return false;">
+    <div class="wrap">
+        <div class="one">
+            <p><label>min:</label><input type="number" required id="min" placeholder="min" min="1"></p>
+            <p><label>max:</label><input type="number" required id="max" placeholder="max"></p>
+            <p>
+                <label>size:</label>
+                <select id="size">
+                    <option value="640">640</option>
+                    <option value="750">750</option>
+                    <option value="1080">1080</option>
+                    <option value="1136">1136</option>
+                </select>
+            </p>
+        </div>
+
+        <div class="two">
+            <input type="submit" value="create" id="create">
+            <input type="button" value="del" id="del">
+            <input type="button" value="compress" id="compress">
+        </div>
+        <div class="three">
+            <textarea id="text"></textarea>
+        </div>
+        <div class="four">
+            <p class="tips">单位换算位：100px = 1rem </p>
+        </div>
+
+    </div>
+</form>
+
+
+</body>
+</html>
+<script>
+    window.onload = function () {
+        function media() {
+            this.text = document.getElementById('text');
+            this.cBtn = document.getElementById('create');
+            this.delBtn = document.getElementById('del');
+            this.min = document.getElementById('min');
+            this.max = document.getElementById('max');
+            this.size = document.getElementById('size');
+            this.compress = document.getElementById('compress');
+            this.sw = null;
+            this.sw1 = null;
+        }
+
+        media.prototype.init = function () {
+            var _this = this;
+
+            _this.delBtn.onclick = function () {
+                _this.text.value = '';
+            }
+
+            window.onkeyup = function (e) {
+                if (e.keyCode == 13) {
+                    _this.create(1);
+                }
+            }
+            _this.cBtn.onclick = function () {
+                _this.create(1);
+            }
+
+            _this.compress.onclick = function () {
+                _this.create(0);
+            }
+
+
+            _this.min.addEventListener("invalid", function () {
+                _this.sw = this.validity.tooLong;
+            }, false);
+            _this.max.addEventListener("invalid", function () {
+                _this.sw1 = this.validity.tooLong;
+            }, false);
+        }
+
+
+        media.prototype.create = function (s) {
+            var _this = this;
+            var minV = parseInt(_this.min.value);
+            var maxV = parseInt(_this.max.value);
+            var size = parseInt(_this.size.value)/2;
+
+            if (!_this.sw) {
+                _this.max.setAttribute('min', minV + 1);
+            }
+
+            if (!_this.sw && !_this.sw1 && minV < maxV && minV != 0 && maxV != 0) {
+                var str = '';
+                for (var i = minV; i <= maxV; i++) {
+                    var x = i / size * 312.5;
+                    if (s) {
+                        str += '@media (min-width: ' + i + 'px) { html { font-size: ' + x + '%; } }\r\n'
+                    } else {
+                        str += '@media (min-width: ' + i + 'px) { html { font-size: ' + x + '%; } }'
+                    }
+                }
+                this.text.value = str;
+                this.text.select();
+            }
+        }
+        new media().init();
+    }
+
+
+</script>

@@ -1,0 +1,58 @@
+@charset "utf-8";
+/*======== 重置 ==========*/
+body,dl,dd,ul,ol,h1,h2,h3,h4,h5,h6,pre,form,fieldset,legend,input,textarea,optgroup,p,blockquote,figure,
+hr,menu,dir,thead,tbody,tfoot,th,td{margin: 0;padding: 0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary{display: block;}
+ul,ol{list-style-type: none;list-style-image: none;}
+a{text-decoration: none;}
+a:active{background-color: transparent;}
+a:active,a:hover{outline: 0 none;}
+a:focus{outline: 1px dotted;}
+html{-webkit-tap-highlight-color: transparent;}
+html,
+body{width: 100%;height: 100%;}
+body{font-family: "microsoft yahei";line-height: 1; font-size: 0.12rem;}
+h1,h2,h3,h4,h5,h6{font-size: 100%;font-weight: normal;}
+button,input,select,textarea{font-family: "microsoft yahei";font-size: 100%; outline: none}
+textarea{overflow: auto;resize: vertical;}
+pre{white-space: pre;white-space: pre-wrap;word-wrap: break-word;overflow: auto;}
+table{border-collapse: collapse;border-spacing: 0;}
+
+.g-wrap{ max-width: 6.4rem; min-width: 3.2rem; margin: 0 auto;}
+
+/*======= ui组件（unit）（.u-） ==============*/
+.u-arrow{font-size: 0;width: 0;height: 0;line-height: 0;display: inline-block;*display: inline;*zoom: 1;vertical-align: -2px;border: 0 dashed transparent;border-width: 10px;}
+.u-arrow.top{border-bottom-style: solid;border-bottom-color: #2AB2DF;}
+.u-arrow.bottom{border-top-style: solid;border-top-color: #2AB2DF;}
+.u-arrow.left{border-right-style: solid;border-right-color: #2AB2DF;}
+.u-arrow.right{border-left-style: solid;border-left-color: #2AB2DF;}
+/* ◤左上角 */
+.u-arrow.left-top{border-top-style: solid;border-top-color: #2AB2DF;border-left-width: 0 !important;}
+/* ◥右上角 */
+.u-arrow.right-top{border-top-style: solid;border-top-color: #2AB2DF;border-right-width: 0 !important;}
+/* ◣左下角 */
+.u-arrow.left-bottom{border-bottom-style: solid;border-bottom-color: #2AB2DF;border-left-width: 0 !important;}
+/* ◢右下角 */
+.u-arrow.right-bottom{border-bottom-style: solid;border-bottom-color: #2AB2DF;border-right-width: 0 !important;}
+
+
+/*======= 功能（function）（.f-） ==============*/
+/*清楚浮动*/
+.f-clearfix:after{content: "";display: table;}
+.f-clearfix:after{clear: both;}
+.f-clearfix{*zoom: 1;}
+
+/*显示隐藏*/
+.f-hide{display: none;}
+.f-show{display: block;}
+
+/* 强制不换行 */
+.f-nowrap{white-space: nowrap;word-wrap: normal;}
+/* 连续字符换行 */
+.f-wrap{white-space: normal;word-wrap: break-word;}
+/*文字溢出显示省略号*/
+.f-ellipsis{display: block;white-space: nowrap;word-wrap: normal;overflow: hidden;-o-text-overflow: ellipsis;text-overflow: ellipsis;text-align: left;}
+
+
+
+
