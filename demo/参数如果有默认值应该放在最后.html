@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body></body>
+</html>
+<script>
+    function multiply(a = 1, b) {
+        return a * b
+    }
+
+    var x = multiply(42) // returns NaN as b is undefined
+    console.log('x: ', x);
+</script>
