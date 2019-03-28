@@ -8,12 +8,16 @@
     </head>
     <body></body>
 </html>
+
 <script>
-    let node = {
-    type: "Identifier",
-    name: "foo"
-};
-let { type: localType, name: localName } = node;
-console.log(localType); // "Identifier"
-console.log(localName); // "foo"
+    console.log('script');
+</script>
+<script>
+    window.onload = function () {
+        console.log('load');
+    }
+</script>
+<!-- defer 会在onload之前执行 -->
+<script defer>
+    console.log('defer')
 </script>
